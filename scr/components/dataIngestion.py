@@ -4,6 +4,9 @@ from scr.logger import logging
 from scr.exception import CustomException
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from dataclasses import dataclass
+from scr.components.dataTransformation import dataTransformer
+from scr.components.modelTrainer import ModelTrainer
 
 @dataclass
 class data_ingestion_config:
@@ -35,6 +38,12 @@ class data_ingestion:
 if __name__ == "__main__":
     obj = data_ingestion()
     train_set, test_set = obj.data_ingestion_intiate()
+    data_transformation = dataTransformer()
+    train_arr, test_arr, _= data_transformation.data_transformer_intiation(train_set, test_set)
+    model_trained = ModelTrainer()
+    model_trained.intiate_model_training(train_arr=train_arr, test_arr=test_arr)
+    
+
             
 
         
